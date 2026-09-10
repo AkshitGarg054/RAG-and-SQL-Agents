@@ -45,12 +45,7 @@ NOTE: This is the general structure of the project, however there might be small
 
 ---
 
-## Video Explanation: 
-A detailed explanation of the project is available in the following YouTube video:
 
-Automating LLM Agents to Chat with Multiple/Large Databases (Combining RAG and SQL Agents): [Link](https://youtu.be/xsCedrNP9w8?si=v-3k-BoDky_1IRsg)
-
----
 
 ## Requirements
 
@@ -121,7 +116,7 @@ For unstructured data using Retrieval-Augmented Generation (RAG):
 
 All configurations are managed through YAML files in the `configs` folder, loaded by `src\chatbot\load_config.py` and `src\agent_graph\load_tools_config.py`. These modules are used for a clean distribution of configurations throughout the project.
 
-Once your databases are ready, you can either connect the current agents to the databases or create new agents. More details can be found in the accompanying YouTube video.
+Once your databases are ready, you can either connect the current agents to the databases or create new agents.
 
 ---
 
@@ -135,27 +130,27 @@ The following flowchart illustrates the lifecycle of a user prompt traveling thr
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gradio (app.py)
-    participant ChatBot Backend
-    participant LangGraph Engine
-    participant SQL Databases (travel, chinook)
-    participant Vector DBs (policy, stories)
+    participant Gradio as Gradio (app.py)
+    participant ChatBot as ChatBot Backend
+    participant LangGraph as LangGraph Engine
+    participant SQL as SQL Databases (travel, chinook)
+    participant Vector as Vector DBs (policy, stories)
 
-    User->>Gradio (app.py): Submits question
-    Gradio (app.py)->>ChatBot Backend: Passes dictionary message {"role": "user", "content": "..."}
-    ChatBot Backend->>LangGraph Engine: Invokes agent graph
+    User->>Gradio: Submits question
+    Gradio->>ChatBot: Passes dictionary message {"role": "user", "content": "..."}
+    ChatBot->>LangGraph: Invokes agent graph
     
     alt Needs Structured Data (SQL)
-        LangGraph Engine->>SQL Databases (travel, chinook): Queries SQL schema & executes query
-        SQL Databases (travel, chinook)-->>LangGraph Engine: Returns SQL tabular rows
+        LangGraph->>SQL: Queries SQL schema & executes query
+        SQL-->>LangGraph: Returns SQL tabular rows
     else Needs Unstructured Text (RAG)
-        LangGraph Engine->>Vector DBs (policy, stories): Embeds query & searches DB
-        Vector DBs (policy, stories)-->>LangGraph Engine: Returns most relevant text paragraphs
+        LangGraph->>Vector: Embeds query & searches DB
+        Vector-->>LangGraph: Returns most relevant text paragraphs
     end
 
-    LangGraph Engine-->>ChatBot Backend: Synthesizes and streams final answer
-    ChatBot Backend->>ChatBot Backend: Saves chat history & handles memory
-    ChatBot Backend-->>Gradio (app.py): Renders final text in UI
+    LangGraph-->>ChatBot: Synthesizes and streams final answer
+    ChatBot->>ChatBot: Saves chat history & handles memory
+    ChatBot-->>Gradio: Renders final text in UI
 ```
 
 > **Note:** For much more detailed execution flows of every single individual database, check out our [Data Flow Diagrams Documentation](data_flow_diagrams.md) and our [Code Architecture Overview](project_architecture.md).

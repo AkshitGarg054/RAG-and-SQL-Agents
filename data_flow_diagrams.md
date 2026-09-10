@@ -13,19 +13,19 @@ Regardless of what you ask, every message passes through the same initial UI and
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gradio (app.py)
+    participant Gradio as Gradio (app.py)
     participant ChatBot
     participant Memory
-    participant LangGraph Engine
+    participant LangGraph as LangGraph Engine
 
-    User->>Gradio (app.py): Types message & clicks Submit
-    Gradio (app.py)->>ChatBot: Passes dictionary message {"role": "user", "content": "..."}
-    ChatBot->>LangGraph Engine: Invokes graph with message history
-    LangGraph Engine-->>ChatBot: Streams chunks of AI thought process
-    ChatBot-->>Gradio (app.py): Yields streamed tokens to UI
-    LangGraph Engine->>ChatBot: Returns final complete answer
+    User->>Gradio: Types message & clicks Submit
+    Gradio->>ChatBot: Passes dictionary message {"role": "user", "content": "..."}
+    ChatBot->>LangGraph: Invokes graph with message history
+    LangGraph-->>ChatBot: Streams chunks of AI thought process
+    ChatBot-->>Gradio: Yields streamed tokens to UI
+    LangGraph->>ChatBot: Returns final complete answer
     ChatBot->>Memory: Saves [user_msg, bot_msg] to SQLite & CSV
-    ChatBot-->>Gradio (app.py): Final UI Update
+    ChatBot-->>Gradio: Final UI Update
 ```
 
 ---
