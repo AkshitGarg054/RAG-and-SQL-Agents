@@ -42,7 +42,7 @@ When the user asks a question about unstructured text (e.g., "What is the baggag
 
 ```mermaid
 flowchart TD
-    A[User Query: "What is the baggage limit?"] --> B[LangGraph Engine]
+    A[User Query: 'What is the baggage limit?'] --> B[LangGraph Engine]
     B -->|Decides Tool Needed| C(route_tools)
     C -->|Routes to Tool Node| D[BasicToolNode]
     D --> E[lookup_swiss_airline_policy]
@@ -73,7 +73,7 @@ When the user asks for analytical or specific transactional data (e.g., "How man
 
 ```mermaid
 flowchart TD
-    A[User Query: "How many flights from Zurich?"] --> B[LangGraph Engine]
+    A[User Query: 'How many flights from Zurich?'] --> B[LangGraph Engine]
     B -->|Reads DB Schema| B
     B -->|Generates SQL Query| C(route_tools)
     C -->|Routes to Tool Node| D[BasicToolNode]
@@ -105,7 +105,7 @@ When the user asks about the music store (e.g., "Which artist sold the most rock
 
 ```mermaid
 flowchart TD
-    A[User Query: "Top selling rock artist?"] --> B[LangGraph Engine]
+    A[User Query: 'Top selling rock artist?'] --> B[LangGraph Engine]
     
     subgraph Table Filtering
         B -->|Invokes get_tables| C[Filter Relevant Tables]
@@ -141,7 +141,7 @@ When a user asks a question about current events or information not present in a
 
 ```mermaid
 flowchart TD
-    A[User Query: "What is the weather in Tokyo?"] --> B[LangGraph Engine]
+    A[User Query: 'What is the weather in Tokyo?'] --> B[LangGraph Engine]
     B -->|Generates Search String| C(route_tools)
     C -->|Routes to Tool Node| D[BasicToolNode]
     D --> E[Tavily Search Tool]
