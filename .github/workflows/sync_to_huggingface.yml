@@ -3,7 +3,6 @@ name: Sync to Hugging Face Space
 on:
   push:
     branches: [main]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -15,9 +14,16 @@ jobs:
           fetch-depth: 0
           lfs: true
           
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install huggingface_hub
+        run: pip install huggingface_hub
+        
       - name: Push to Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote add space https://x-access-token:$HF_TOKEN@huggingface.co/spaces/akshittt/AgentGraph
-          git push --force space main
+          huggingface-cli upload akshittt/AgentGraph . . --repo-type=space --exclude ".git/*" ".github/*"
