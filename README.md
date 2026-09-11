@@ -1,13 +1,3 @@
----
-title: AgentGraph
-emoji: 🤖
-colorFrom: blue
-colorTo: indigo
-sdk: gradio
-sdk_version: "6.26.0"
-app_file: src/app.py
-pinned: false
----
 
 # AgentGraph: Intelligent SQL-agent Q&A and RAG System for Chatting with Multiple Databases
 
