@@ -13,9 +13,8 @@ class LoadToolsConfig:
         with open(here("configs/tools_config.yml")) as cfg:
             app_config = yaml.load(cfg, Loader=yaml.FullLoader)
 
-        # Set environment variables
-        os.environ['GOOGLE_API_KEY'] = os.getenv("GOOGLE_API_KEY")
-        os.environ['TAVILY_API_KEY'] = os.getenv("TAVILY_API_KEY")
+        # The environment variables GOOGLE_API_KEY and TAVILY_API_KEY are automatically 
+        # loaded into os.environ by load_dotenv() or provided by Hugging Face Secrets.
 
         # Primary agent
         self.primary_agent_llm = app_config["primary_agent"]["llm"]
