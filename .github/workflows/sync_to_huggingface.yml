@@ -26,4 +26,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          huggingface-cli upload akshittt/AgentGraph . . --repo-type=space --exclude ".git/*" ".github/*"
+          hf upload akshittt/AgentGraph . . --repo-type=space --exclude ".git/*" ".github/*"
