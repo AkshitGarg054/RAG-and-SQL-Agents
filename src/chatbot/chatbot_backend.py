@@ -1,4 +1,5 @@
 import uuid
+import spaces
 from typing import List, Tuple
 from chatbot.load_config import LoadProjectConfig
 from agent_graph.load_tools_config import LoadToolsConfig
@@ -48,6 +49,7 @@ class ChatBot:
         return session_id, []
 
     @staticmethod
+    @spaces.GPU
     def respond(chatbot: List, message: str, session_id: str) -> Tuple:
         """
         Processes a user message using the agent graph, generates a response, and appends it to the chat history.
