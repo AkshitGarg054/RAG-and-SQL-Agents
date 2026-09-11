@@ -122,9 +122,4 @@ def query_chinook_sqldb(query: str) -> str:
 
     query = agent.full_chain.invoke({"question": query})
 
-    if isinstance(query, str):
-        if query.startswith("SQLQuery:"):
-            query = query[len("SQLQuery:"):].strip()
-        query = query.replace("```sql", "").replace("```", "").strip()
-
     return agent.db.run(query)
